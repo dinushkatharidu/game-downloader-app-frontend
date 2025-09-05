@@ -1,16 +1,33 @@
-import BodySecton from "./components/BodySection";
+import React, { useState } from "react";
+import BodySecton from "./components/UpperBodySection";
 import Footer from "./components/Footer";
-import GameSection from "./components/GameSection";
+import GameLibrary from "./components/GameLibrary";
+import GameSection from "./components/LowerBodySection";
 import NavBar from "./components/NavBar";
 
-function App() {
+type Section = "home" | "games";
+
+const App: React.FC = () => {
+  
+  const [visibleSection, setVisibleSection] = useState<Section>("home");
+
+  
+  const handleSectionChange = (section: Section) => {
+    setVisibleSection(section);
+  };
+
   return (
-    <div>
-      <NavBar />
-      <BodySecton />
-      <GameSection />
+    <>
+      <NavBar onSectionChange={handleSectionChange} />
+      {visibleSection === "home" && (
+        <>
+          <BodySecton />
+          <GameSection />
+        </>
+      )}
+      {visibleSection === "games" && <GameLibrary />}
       <Footer />
-    </div>
+    </>
   );
 }
 

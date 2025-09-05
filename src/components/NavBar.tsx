@@ -1,18 +1,22 @@
-function NavBar() {
+
+interface NavbarProps {
+  onSectionChange: (section: "home" | "games") => void;
+}
+
+const NavBar: React.FC<NavbarProps> = ({ onSectionChange }) => {
   return (
-    <nav className="navbar navbar-dark bg-dark">
+      <nav className="navbar navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="#" onClick={() => onSectionChange("home")}>
           GameFlix
         </a>
         <div>
-          <a className="btn btn-outline-light mx-2" href="#">
+          <button
+            className="btn btn-outline-light mx-2"
+            onClick={() => onSectionChange("games")}
+          >
             Games
-          </a>
-          <a className="btn btn-outline-light mx-2" href="#">
-            Subscriptions
-          </a>
-          <button className="btn btn-danger">Sign In</button>
+          </button>
         </div>
       </div>
     </nav>
